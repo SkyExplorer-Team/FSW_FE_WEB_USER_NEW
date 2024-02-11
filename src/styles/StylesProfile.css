@@ -1,0 +1,93 @@
+body {
+  background: #f6f7f9;
+}
+
+.container > .grid > .col-span-12 > .card {
+  border-radius: 16px;
+}
+
+.container > .grid > .col-span-12 > .card > .heading {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container > .grid > .col-span-12 > .card > .heading > .profile-title {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 48px; /* 150% */
+}
+
+.container > .grid > .col-span-12 > .card > .heading > .btn-save {
+  background: var(--Primary-500, #38a993);
+  width: 155px;
+  padding: var(--Gap-and-Padding-Positive-GapPadding-14, 14px);
+  border-radius: var(--Corner-Radius-Radius-Button-10, 10px);
+  color: var(--Base-White, #fff);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 142.857% */
+}
+
+.container > .grid > .col-span-12 > .card > .navigation-card-second-column {
+  display: flex;
+}
+
+.container
+  > .grid
+  > .col-span-12
+  > .card
+  > .navigation-card-second-column
+  > .personal-info-navigate {
+  color: var(--Neutral-400, #99a2b2);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin-top: 20px;
+  margin-right: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.container
+  > .grid
+  > .col-span-12
+  > .card
+  > .navigation-card-second-column
+  > .travel-document-navigate {
+  color: var(--Neutral-400, #99a2b2);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; /* 150% */
+  margin-top: 20px;
+  margin-right: 45px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.container
+  > .grid
+  > .col-span-12
+  > .card
+  > .navigation-card-second-column
+  > .active {
+  color: var(--Base-Black, #111);
+  border-bottom: 2px solid green;
+  padding-bottom: 14px;
+}
+.container > .grid > .col-span-12 > .card > .title-personal_info,
+.container > .grid > .col-span-12 > .card > form > .title-personal_info {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 24px;
+}
+.container > .grid > .col-span-12 > .card > .sub_title-personal_info,
+.container > .grid > .col-span-12 > .card > form > .sub_title-personal_info {
+  font-size: 16px;
+  margin-top: 20px;
+  font-weight: 400;
+  color: var(--Neutral-500, #677084);
+}

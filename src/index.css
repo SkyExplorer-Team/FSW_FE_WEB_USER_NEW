@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-select-selection {
+  background-color: transparent;
+}
+
+.custom-modal > .ant-modal-content {
+  border-radius: 16px;
+  padding: 0px;
+}
+
+.custom-modal > .ant-modal-content > .ant-modal-header {
+  border-radius: 30px;
+}
+
+.custom-modal > .ant-modal-content > .ant-modal-footer {
+  border-radius: 30px;
+}

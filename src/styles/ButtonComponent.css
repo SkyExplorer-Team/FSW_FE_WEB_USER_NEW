@@ -1,0 +1,29 @@
+/* ButtonComponent.css */
+
+.custom-button {
+  @apply p-2 rounded;
+}
+
+.custom-button:hover {
+  @apply shadow-md;
+}
+
+.custom-primary {
+  @apply bg-primary text-base-white;
+}
+
+.custom-secondary {
+  @apply bg-primary-background text-base-white;
+}
+
+.custom-outline {
+  @apply border bg-primary-input_text text-base-white;
+}
+
+.custom-text {
+  @apply text-primary;
+}
+
+.custom-disabled {
+  @apply bg-disabled text-base-white font-bold cursor-not-allowed;
+}
