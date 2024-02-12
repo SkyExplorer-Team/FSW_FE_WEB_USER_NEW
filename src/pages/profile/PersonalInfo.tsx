@@ -12,6 +12,7 @@ interface ContactFormData {
 const { Option } = Select;
 
 const PersonalInfo: React.FC = () => {
+  
   const [isNoFirstMiddleNameChecked, setIsNoFirstMiddleNameChecked] =
     useState<boolean>(false);
 
@@ -134,8 +135,21 @@ const PersonalInfo: React.FC = () => {
             value={selectedNationality}
             className="font-normal"
             placeholder="Select your nationality"
-            style={{ height: "40px" }}
-            suffixIcon={<DownOutlined style={{ color: "#d9d9d9" }} />}
+            style={{ height: "40px", width: "100%" }}
+            dropdownRender={(menu) => (
+              <div>
+                {menu}
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "8px",
+                    cursor: "pointer",
+                  }}
+                >
+                  <DownOutlined style={{ color: "#d9d9d9" }} />
+                </div>
+              </div>
+            )}
           >
             {nationalityOptions.map((option) => (
               <Option key={option.value} value={option.value}>
@@ -166,12 +180,14 @@ const PersonalInfo: React.FC = () => {
         </Form.Item>
 
         <h2 className="title-personal_info">Contact Detail</h2>
-        <h2 className="sub_title-personal_info" style={{ marginBottom: "20px" }}>
+        <h2
+          className="sub_title-personal_info"
+          style={{ marginBottom: "20px" }}
+        >
           Provide us with your most recent contact information.
         </h2>
 
-        <Form.Item
-        >
+        <Form.Item>
           <Typography.Title
             style={{ paddingBottom: 0, marginBottom: 0 }}
             level={5}

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Select, Form, Input, Typography, DatePicker } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import type { DatePickerProps } from "antd";
 import { FlagIcon, FlagIconCode } from "react-flag-kit";
 
@@ -12,12 +11,7 @@ interface ContactFormData {
 const { Option } = Select;
 
 const TravelDocument: React.FC = () => {
-  // const [isNoFirstMiddleNameChecked, setIsNoFirstMiddleNameChecked] =
-  //   useState<boolean>(false);
-
-  // const handleChange = (value: string) => {
-  //   console.log(`selected ${value}`);
-  // };
+    
 
   const nationalityOptions = [
     { flag: "🇺🇸", name: "United States", value: "US" },
@@ -114,8 +108,7 @@ const TravelDocument: React.FC = () => {
             value={selectedNationality}
             className="font-normal"
             placeholder="Select your nationality"
-            style={{ height: "40px" }}
-            suffixIcon={<DownOutlined style={{ color: "#d9d9d9" }} />}
+            style={{ height: "40px" }}            
           >
             {nationalityOptions.map((option) => (
               <Option key={option.value} value={option.value}>
@@ -130,9 +123,9 @@ const TravelDocument: React.FC = () => {
               </Option>
             ))}
           </Select>
-        </Form.Item>
+        </Form.Item>                
 
-        <h2 className="title-personal_info" style={{ marginBottom: "20px" }}>National Identity</h2>
+        <h2 className="title-personal_info" style={{ marginBottom: "20px" }}>National Identity</h2>        
         <Form.Item>
           <Typography.Title
             style={{ paddingBottom: 0, marginBottom: 0, marginTop: 10 }}
@@ -160,8 +153,7 @@ const TravelDocument: React.FC = () => {
             value={selectedNationality}
             className="font-normal"
             placeholder="Select your nationality"
-            style={{ height: "40px" }}
-            suffixIcon={<DownOutlined style={{ color: "#d9d9d9" }} />}
+            style={{ height: "40px" }}            
           >
             {nationalityOptions.map((option) => (
               <Option key={option.value} value={option.value}>
@@ -176,7 +168,7 @@ const TravelDocument: React.FC = () => {
               </Option>
             ))}
           </Select>
-        </Form.Item>
+        </Form.Item>   
         <h2 className="title-personal_info">Emergency Contact</h2>
         <Form.Item>
           <Typography.Title
@@ -186,12 +178,12 @@ const TravelDocument: React.FC = () => {
             First and Middle Name
           </Typography.Title>
           <Input
-            placeholder="Your First & Middle Name"
+            placeholder="Your First & Middle Name"            
             style={{ height: "40px" }}
           />
-          <label style={{ color: "var(--Neutral-400, #99A2B2)", fontSize: "14px", fontWeight: "400" }}>
+          <label style={{ color: "var(--Neutral-400, #99A2B2)", fontSize: "14px", fontWeight: "400" }}>            
             Middle name is optional
-          </label>
+          </label>          
         </Form.Item>
         <Form.Item>
           <Typography.Title
@@ -201,11 +193,11 @@ const TravelDocument: React.FC = () => {
             Last Name
           </Typography.Title>
           <Input
-            placeholder="Your Last Name"
+            placeholder="Your Last Name"            
             style={{ height: "40px" }}
-          />
+          />          
         </Form.Item>
-        <Form.Item
+        <Form.Item                    
         >
           <Typography.Title
             style={{ paddingBottom: 0, marginBottom: 0 }}
@@ -246,7 +238,7 @@ const TravelDocument: React.FC = () => {
             style={{
               display: "inline-block",
               width: "80%",
-            }}
+            }}            
           >
             <Input
               size="large"
