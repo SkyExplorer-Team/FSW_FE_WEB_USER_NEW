@@ -56,30 +56,37 @@ interface VerificationFormData {
 const nationalityOptions: {
   name: string;
   id: string;
+  countryCode: string;
 }[] = [
   {
     id: "ae6e9985-8683-494d-9c91-93a7f36d6003",
     name: "UNITED STATES",
+    countryCode: "+1",
   },
   {
     id: "45930fd0-5990-469c-80cd-9d7648250139",
     name: "CHINA",
+    countryCode: "+86",
   },
   {
     id: "4f42934e-35b6-4fa8-832c-7cdf88c464dc",
     name: "UNITED KINGDOM",
+    countryCode: "+44",
   },
   {
     id: "6fb3e59a-ab7b-45d2-be0f-ce700633d459",
     name: "UNITED ARAB EMIRATES",
+    countryCode: "+971",
   },
   {
     id: "7e9ac63c-d3f0-46d6-bd58-1cc46b88f2c8",
     name: "INDONESIA",
+    countryCode: "+62",
   },
   {
     id: "2a9160ff-e1ad-410f-827f-05946127fe04",
     name: "JAPAN",
+    countryCode: "+81",
   },
 ];
 
@@ -91,7 +98,7 @@ const SignUpPage: React.FC = () => {
   const [verificationCode] = useState<string | null>(null);
   // const [counter, setCounter] = useState<number>(60);
   const [verificationCodeCounter, setVerificationCodeCounter] =
-    useState<number>(5);
+    useState<number>(60);
   const [isNoFirstMiddleNameChecked, setIsNoFirstMiddleNameChecked] =
     useState<boolean>(false);
   // const [nationalityOptions, setNationalityOptions] = useState([]);
@@ -108,13 +115,46 @@ const SignUpPage: React.FC = () => {
   const navigate = useNavigate();
 
   const handleNext = () => {
-    console.log(currentStep);
-    if (currentStep === 2) {
-      startVerificationCodeCounter();
-      setCurrentStep(currentStep + 1);
-    } else {
-      setCurrentStep(currentStep + 1);
+    if (currentStep === 0) {
+      // Store personalInfoForm data
+      personalInfoForm
+        .validateFields()
+        .then((values) => {
+          setPersonalData({
+            salutation: values.salutation,
+            firstName: values.firstMiddleName || "",
+            lastName: values.lastName,
+            nationality: values.nationality,
+            dob: values.dob.format("DD MMMM YYYY").toString(),
+          });
+
+          if (isNoFirstMiddleNameChecked) {
+            setPersonalData({
+              ...personalData,
+              firstName: "",
+            });
+          }
+        })
+        .catch((errorInfo) => {
+          console.log("Validation failed:", errorInfo);
+        });
+    } else if (currentStep === 1) {
+      // Store contactDetailForm data
+      contactDetailForm
+        .validateFields()
+        .then((values) => {
+          setContactData({
+            email: values.email,
+            phoneNumber: `${values.locale}${values.phoneNumber}`,
+          });
+        })
+        .catch((errorInfo) => {
+          console.log("Validation failed:", errorInfo);
+        });
     }
+
+    // Move to the next step
+    setCurrentStep(currentStep + 1);
   };
 
   const [personalInfoForm] = Form.useForm();
@@ -133,6 +173,36 @@ const SignUpPage: React.FC = () => {
     email: "",
     phoneNumber: "",
   });
+
+  const handleEditButtonClick = (section: "personalInfo" | "contactDetail") => {
+    if (section === "personalInfo") {
+      // Reset personalInfoForm values based on stored personalData
+      personalInfoForm.setFieldsValue({
+        salutation: personalData.salutation,
+        firstMiddleName: isNoFirstMiddleNameChecked
+          ? ""
+          : personalData.firstName,
+        noFirstMiddleName: isNoFirstMiddleNameChecked,
+        lastName: personalData.lastName,
+        nationality: getSelectedNationalityName() || "",
+        dob: moment(personalData.dob, "DD MMMM YYYY"), // Use moment to parse the date
+      });
+
+      // Set current step to 0
+      setCurrentStep(0);
+    } else if (section === "contactDetail") {
+      // Reset contactDetailForm values based on stored contactData
+      contactDetailForm.setFieldsValue({
+        locale: "", // You may need to parse the locale from stored contactData
+        phoneNumber: contactData.phoneNumber,
+        email: contactData.email,
+      });
+
+      // Set current step to 1
+      setCurrentStep(1);
+    }
+  };
+
   const [passwordData, setPasswordData] = useState<PasswordFormData>({
     password: "",
     confirmPassword: "",
@@ -149,6 +219,13 @@ const SignUpPage: React.FC = () => {
         if (selectedOption) {
           setLocale(selectedOption.id);
         }
+      }
+
+      if (fieldName === "firstName" && isNoFirstMiddleNameChecked) {
+        setPersonalData({
+          ...personalData,
+          [fieldName]: "",
+        });
       }
 
       setPersonalData({
@@ -195,9 +272,9 @@ const SignUpPage: React.FC = () => {
     navigate("/login");
   };
 
-  // const handleSignUpSuccess = () => {
-  //   // navigate("/index")
-  // };
+  const handleHomepage = () => {
+    navigate("/");
+  };
 
   const handleTermsClick = () => {
     setTermsVisible(true);
@@ -287,19 +364,6 @@ const SignUpPage: React.FC = () => {
   const minutes = Math.floor(verificationCodeCounter / 60);
   const seconds = verificationCodeCounter % 60;
 
-  // const validateNumber = (
-  //   _: any,
-  //   value: string,
-  //   callback: (error?: string) => void
-  // ) => {
-  //   const regex = /^[0-9]*$/;
-  //   if (!value || regex.test(value)) {
-  //     callback();
-  //   } else {
-  //     callback("Masukkan hanya angka!");
-  //   }
-  // };
-
   const validateFirstName: Rule = ({ getFieldValue }) => ({
     validator(_, value) {
       const noFirstMiddleName = getFieldValue("noFirstMiddleName");
@@ -319,50 +383,6 @@ const SignUpPage: React.FC = () => {
       return Promise.reject("Please enter a valid name with alphabets only.");
     },
   });
-
-  // const handleRegister = async () => {
-  //   try {
-  //     const registerData = {
-  //       firstName: personalData.firstName,
-  //       lastName: personalData.lastName,
-  //       password: passwordData.password,
-  //       salutation: personalData.salutation,
-  //       email: contactData.email,
-  //       national: selectedNationality || "",
-  //       dob: personalData.dob,
-  //       phone: contactData.phoneNumber,
-  //       subscribe: true,
-  //       authProvider: "local",
-  //       providerId: "string",
-  //       registrationComplete: false, // Set to false by default
-  //       otpverified: false, // Set to false by default
-  //     };
-
-  //     const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-  //     // Kirim permintaan ke API
-  //     const response = await fetch(`${apiUrl}/auth/register`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(registerData),
-  //     });
-
-  //     if (response.ok) {
-  //       // Registrasi berhasil
-  //       const responseData = await response.json();
-  //       console.log("Registration successful:", responseData);
-  //       setRegistrationSuccess(true);
-  //       // navigate to dashboard
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error("Registration failed:", errorData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during registration:", error);
-  //   }
-  // };
 
   const handleVerifyOTP = async (email: string) => {
     try {
@@ -401,34 +421,6 @@ const SignUpPage: React.FC = () => {
     return selectedOption ? selectedOption.name : "";
   };
 
-  // const postNationality = async () => {
-  //   try {
-  //     const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-  //     // Kirim permintaan ke API untuk menambahkan nationality pilihan user
-  //     const response = await fetch(`${apiUrl}/api/national`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         // 'Authorization': 'Bearer token'
-  //       },
-  //       body: JSON.stringify({
-  //         // Data nasional yang akan ditambahkan
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       console.log("Nationality added successfully:", responseData);
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error("Failed to add nationality:", errorData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during adding nationality:", error);
-  //   }
-  // };
-
   const handleOtpResend = async (email: string) => {
     try {
       const apiUrl = process.env.REACT_APP_API_BASE_URL;
@@ -462,43 +454,15 @@ const SignUpPage: React.FC = () => {
     }
   };
 
-  // const handleSetPassword = async (email: string) => {
-  //   try {
-  //     const apiUrl = process.env.REACT_APP_API_BASE_URL;
-
-  //     // Kirim permintaan ke API untuk menetapkan kata sandi
-  //     const response = await fetch(`${apiUrl}/auth/setPassword`, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         email: email,
-  //         password: passwordData.password,
-  //         // Tambahkan parameter lain yang diperlukan untuk menetapkan kata sandi
-  //       }),
-  //     });
-
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       console.log("Password set successfully:", responseData);
-
-  //       // Lanjutkan ke langkah berikutnya setelah menetapkan kata sandi
-  //       handleNext();
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.error("Failed to set password:", errorData);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error during setting password:", error);
-  //   }
-  // };
-
   useEffect(() => {
     if (verificationCodeCounter === 0) {
       setIsOtpResend(false);
     }
   }, [verificationCodeCounter]);
+
+  const phoneCode = nationalityOptions.find(
+    (option) => option.name === personalData.nationality
+  )?.countryCode;
 
   return (
     <div className="flex flex-col md:flex-row gap-4">
@@ -809,7 +773,7 @@ const SignUpPage: React.FC = () => {
                   className="bg-primary mb-2 mt-5"
                   size="large"
                   block={true}
-                  onClick={() => navigate("/src/pages/index.tsx")}
+                  onClick={handleHomepage}
                 >
                   Sign In
                 </Button>
@@ -884,6 +848,7 @@ const SignUpPage: React.FC = () => {
                       }
                     />
                   </Form.Item>
+
                   <Form.Item
                     name="noFirstMiddleName"
                     valuePropName="checked"
@@ -893,6 +858,18 @@ const SignUpPage: React.FC = () => {
                       className="font-normal"
                       onChange={(e) => {
                         setIsNoFirstMiddleNameChecked(e.target.checked);
+                        if (e.target.checked) {
+                          // Jika checkbox dicentang, set nilai firstName menjadi string kosong
+                          setPersonalData((prevData) => ({
+                            ...prevData,
+                            firstName: "",
+                          }));
+                          console.log("Personal Form values:", personalData);
+                        }
+                        // cek
+                        // setTimeout(() => {
+                        //   console.log("Personal Form values:", personalData);
+                        // }, 0);
                       }}
                     >
                       This passenger doesn’t have a first & middle name in the
@@ -922,7 +899,6 @@ const SignUpPage: React.FC = () => {
                       }
                     />
                   </Form.Item>
-
                   <Form.Item
                     label="Nationality"
                     name="nationality"
@@ -941,7 +917,6 @@ const SignUpPage: React.FC = () => {
                       suffix={<DownOutlined style={{ color: "#d9d9d9" }} />}
                     />
                   </Form.Item>
-
                   {/* Nationality Modal */}
                   <Modal
                     title="Select your nationality"
@@ -978,7 +953,6 @@ const SignUpPage: React.FC = () => {
                       ))}
                     </div>
                   </Modal>
-
                   <Form.Item
                     label="Date of Birth"
                     name="dob"
@@ -1001,10 +975,12 @@ const SignUpPage: React.FC = () => {
                           }
 
                           const today = moment().startOf("day");
+                          const minDate = moment().subtract(17, "years");
 
                           if (
                             selectedDate.isAfter(today) ||
-                            selectedDate.isSame(today)
+                            selectedDate.isSame(today) ||
+                            selectedDate.isAfter(minDate)
                           ) {
                             return Promise.reject(
                               "Please select a valid date of birth"
@@ -1020,7 +996,9 @@ const SignUpPage: React.FC = () => {
                       className="font-normal"
                       style={{ width: "100%" }}
                       disabledDate={(currentDate) =>
-                        currentDate && currentDate >= moment().endOf("day")
+                        currentDate &&
+                        (currentDate >= moment().endOf("day") ||
+                          currentDate > moment().subtract(17, "years"))
                       }
                       onChange={(currentDate) =>
                         handlePersonalFormChange("dob")(
@@ -1030,6 +1008,7 @@ const SignUpPage: React.FC = () => {
                       format={"DD MMMM YYYY"}
                     />
                   </Form.Item>
+
                   <Form.Item>
                     <SubmitButton form={personalInfoForm} />
                   </Form.Item>
@@ -1061,11 +1040,7 @@ const SignUpPage: React.FC = () => {
                         marginRight: "2%",
                       }}
                     >
-                      <Input
-                        value={locale ? `+${locale}` : ""}
-                        readOnly
-                        size="large"
-                      />
+                      <Input placeholder={phoneCode} readOnly size="large" />
                     </Form.Item>
                     <Form.Item
                       name="phoneNumber"
@@ -1135,10 +1110,13 @@ const SignUpPage: React.FC = () => {
                     <Text className="font-semibold text-xl">
                       Personal Information
                     </Text>
-                    <div className="flex flex-row items-center gap-2">
+                    <button
+                      className="flex flex-row items-center gap-2 cursor-pointer"
+                      onClick={() => handleEditButtonClick("personalInfo")}
+                    >
                       <Text className="font-bold text-primary">Edit</Text>
                       <EditOutlined className="text-primary" />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex flex-row items-center gap-2">
                     <div className="flex flex-col w-1/2">
@@ -1160,10 +1138,13 @@ const SignUpPage: React.FC = () => {
                     <Text className="font-semibold text-xl">
                       Contact Detail
                     </Text>
-                    <div className="flex flex-row items-center gap-2">
+                    <button
+                      className="flex flex-row items-center gap-2 cursor-pointer"
+                      onClick={() => handleEditButtonClick("contactDetail")}
+                    >
                       <Text className="font-bold text-primary">Edit</Text>
                       <EditOutlined className="text-primary" />
-                    </div>
+                    </button>
                   </div>
                   <div className="flex flex-col gap-3">
                     <div className="flex flex-col">
@@ -1176,12 +1157,7 @@ const SignUpPage: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                <Checkbox
-                  className="font-normal my-2"
-                  onChange={(e) => {
-                    setIsNoFirstMiddleNameChecked(e.target.checked);
-                  }}
-                >
+                <Checkbox className="font-normal my-2">
                   Subscribe to newsletter to receive latest offer and promotion
                   every month.
                 </Checkbox>
