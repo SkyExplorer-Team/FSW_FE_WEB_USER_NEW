@@ -6,28 +6,11 @@ body {
   border-radius: 16px;
 }
 
-.container > .grid > .col-span-12 > .card > .heading {
-  display: flex;
-  justify-content: space-between;
-}
-
 .container > .grid > .col-span-12 > .card > .heading > .profile-title {
   font-size: 32px;
   font-style: normal;
   font-weight: 600;
   line-height: 48px; /* 150% */
-}
-
-.container > .grid > .col-span-12 > .card > .heading > .btn-save {
-  background: var(--Primary-500, #38a993);
-  width: 155px;
-  padding: var(--Gap-and-Padding-Positive-GapPadding-14, 14px);
-  border-radius: var(--Corner-Radius-Radius-Button-10, 10px);
-  color: var(--Base-White, #fff);
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 20px; /* 142.857% */
 }
 
 .container > .grid > .col-span-12 > .card > .navigation-card-second-column {

@@ -1,20 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../components/Logo";
-import {
-  Card,
-  ConfigProvider,
-  Dropdown,
-  Layout,
-  Tabs,
-  Pagination,
-  Menu,
-} from "antd";
+import { Card, ConfigProvider, Layout, Tabs, Pagination } from "antd/lib";
 const { TabPane } = Tabs;
 import { MenuProps } from "antd/lib";
-import { DownOutlined, MenuOutlined, RightOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import ReactCountryFlag from "react-country-flag";
 import { useNavigate } from "react-router-dom";
 import HomeFooter from "../../components/home_footer";
 import HomeNavSide from "../../components/home_navside";
@@ -23,7 +12,7 @@ import HeaderComponent from "../../components/Header";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const api_base_url = "https://be-java-master-production.up.railway.app";
 
@@ -520,7 +509,7 @@ const Index: React.FC = () => {
             <div className="grid grid-cols-10 gap-5">
               <HomeNavSide />
               <div className="col-start-1 col-span-10 xl:col-start-4 xl:col-span-6 px-6 py-3 bg-white rounded-[16px] shadow border border-gray-200 flex-col justify-center items-start inline-flex">
-                <div className="text-start text-[#111] font-medium font-['Plus Jakarta Sans'] font-semibold text-3xl">
+                <div className="text-start text-black font-medium font-['Plus Jakarta Sans'] font-semibold text-3xl">
                   Trips
                 </div>
                 <Tabs
@@ -539,7 +528,7 @@ const Index: React.FC = () => {
                               height={210}
                               alt="Background"
                             />
-                            <h1 className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-bold text-xl my-3">
+                            <h1 className="text-center text-black font-medium font-['Plus Jakarta Sans'] font-bold text-xl my-3">
                               No Trips Found
                             </h1>
                             <p className="text-center text-[#677084] font-medium font-['Plus Jakarta Sans'] font-medium text-sm">
@@ -578,23 +567,23 @@ const Index: React.FC = () => {
                                     key={index}
                                   >
                                     <Card.Grid
+                                      className="flex flex-col"
                                       hoverable={false}
                                       style={{
                                         width: "25%",
-                                        height: "100%",
                                         boxShadow: "none",
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-black font-medium font-['Plus Jakarta Sans'] text-lg  md:text-2xl">
                                         {schedule.schedule.departureDate.format(
                                           "HH:mm"
                                         )}
                                       </div>
-                                      <div className="text-center text-[#38A993] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-primary font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
                                         {schedule.schedule.from.abv}
                                       </div>
-                                      <div className="text-center text-[#808991] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg">
+                                      <div className="text-center text-[#808991] font-normal font-['Plus Jakarta Sans'] text-lg">
                                         {schedule.schedule.departureDate.format(
                                           "D MMM"
                                         )}
@@ -609,7 +598,7 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#22313F] text-base font-medium font-['Plus Jakarta Sans'] text-lg my-1">
+                                      <div className="text-center text-neutral-link text-base font-normal font-['Plus Jakarta Sans'] text-md my-1">
                                         {formattedDuration}
                                       </div>
                                       <div className="grid grid-cols-7 gap-1">
@@ -684,7 +673,7 @@ const Index: React.FC = () => {
                                           </svg>
                                         </div>
                                       </div>
-                                      <div className="text-center text-[#22313F] text-base font-medium font-['Plus Jakarta Sans'] text-lg">
+                                      <div className="text-center text-neutral-link text-base font-normal font-['Plus Jakarta Sans'] text-md">
                                         Direct
                                       </div>
                                     </Card.Grid>
@@ -697,15 +686,15 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-black font-medium font-['Plus Jakarta Sans'] text-lg  md:text-2xl">
                                         {schedule.schedule.arrivalDate.format(
                                           "HH:mm"
                                         )}
                                       </div>
-                                      <div className="text-center text-[#38A993] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-primary font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
                                         {schedule.schedule.to.abv}
                                       </div>
-                                      <div className="text-center text-[#808991] tfont-medium font-['Plus Jakarta Sans'] font-semibold text-lg">
+                                      <div className="text-center text-neutral font-normal font-['Plus Jakarta Sans'] text-lg">
                                         {schedule.schedule.arrivalDate.format(
                                           "D MMM"
                                         )}
@@ -726,9 +715,9 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] text-base font-medium font-['Plus Jakarta Sans'] md:my-2">
+                                      <div className="text-center text-black text-base font-medium font-['Plus Jakarta Sans'] md:my-2">
                                         <div className="justify-center h-[51.79px] items-center flex">
-                                          <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-emerald-400 rounded-full items-center mx-2">
+                                          <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-primary rounded-full items-center mx-2">
                                             <img
                                               src="src/assets/airplane.svg"
                                               className=" w-full h-full "
@@ -739,17 +728,20 @@ const Index: React.FC = () => {
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="text-center text-[#111] text-base font-medium font-['Plus Jakarta Sans'] mx-0 md:mx-4">
+                                      <div className="text-center text-black text-base font-medium font-['Plus Jakarta Sans'] mx-0 md:mx-4">
                                         <button
                                           onClick={() => {
                                             navigate(`/trips-detail`);
                                           }}
-                                          className="my-4 justify-center rounded-md bg-white disabled:bg-gray-400 hover:text-base font-bold leading-6 text-primary-dark"
+                                          className="my-4 w-full flex gap-2 items-center hover:text-base font-bold leading-6 text-primary-dark"
                                         >
-                                          <p className="text-center text-primary text-sm md:text-base font-bold font-['Plus Jakarta Sans'] md:p-2 ">
+                                          <p className="text-center text-primary text-sm md:text-base font-semibold font-['Plus Jakarta Sans'] md:p-2 ">
                                             Details{" "}
-                                            <RightOutlined className="ml-1 md:ml-5" />
                                           </p>
+                                          <img
+                                            src="/assets/chevron-right.svg"
+                                            alt="w-4 h-4"
+                                          />
                                         </button>
                                       </div>
                                     </Card.Grid>
@@ -785,7 +777,7 @@ const Index: React.FC = () => {
                               height={210}
                               alt="Background"
                             />
-                            <h1 className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-bold text-xl my-3">
+                            <h1 className="text-center text-black font-medium font-['Plus Jakarta Sans'] font-bold text-xl my-3">
                               No Trips Found
                             </h1>
                             <p className="text-center text-[#677084] font-medium font-['Plus Jakarta Sans'] font-medium text-sm">
@@ -832,15 +824,15 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-black font-medium font-['Plus Jakarta Sans'] text-lg  md:text-2xl">
                                         {schedule.schedule.departureDate.format(
                                           "HH:mm"
                                         )}
                                       </div>
-                                      <div className="text-center text-[#38A993] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-primary font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
                                         {schedule.schedule.from.abv}
                                       </div>
-                                      <div className="text-center text-[#808991] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg">
+                                      <div className="text-center text-neutral-gray font-normal font-['Plus Jakarta Sans'] text-lg">
                                         {schedule.schedule.departureDate.format(
                                           "D MMM"
                                         )}
@@ -855,7 +847,7 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#22313F] text-base font-medium font-['Plus Jakarta Sans'] text-lg my-1">
+                                      <div className="text-center text-neutral-link text-base font-normal font-['Plus Jakarta Sans'] text-md my-1">
                                         {formattedDuration}
                                       </div>
                                       <div className="grid grid-cols-7 gap-1">
@@ -930,7 +922,7 @@ const Index: React.FC = () => {
                                           </svg>
                                         </div>
                                       </div>
-                                      <div className="text-center text-[#22313F] text-base font-medium font-['Plus Jakarta Sans'] text-lg">
+                                      <div className="text-center text-neutral-link text-base font-normal font-['Plus Jakarta Sans'] text-md">
                                         Direct
                                       </div>
                                     </Card.Grid>
@@ -943,15 +935,15 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-black font-medium font-['Plus Jakarta Sans'] text-lg md:text-2xl">
                                         {schedule.schedule.arrivalDate.format(
                                           "HH:mm"
                                         )}
                                       </div>
-                                      <div className="text-center text-[#38A993] font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
+                                      <div className="text-center text-primary font-medium font-['Plus Jakarta Sans'] font-semibold text-lg  md:text-3xl">
                                         {schedule.schedule.to.abv}
                                       </div>
-                                      <div className="text-center text-[#808991] tfont-medium font-['Plus Jakarta Sans'] font-semibold text-lg">
+                                      <div className="text-center text-neutral font-normal font-['Plus Jakarta Sans'] text-lg">
                                         {schedule.schedule.arrivalDate.format(
                                           "D MMM"
                                         )}
@@ -964,6 +956,7 @@ const Index: React.FC = () => {
                                     key={index}
                                   >
                                     <Card.Grid
+                                      className="flex flex-col items-start gap-2"
                                       hoverable={false}
                                       style={{
                                         width: "100%",
@@ -972,9 +965,9 @@ const Index: React.FC = () => {
                                         padding: "10px",
                                       }}
                                     >
-                                      <div className="text-center text-[#111] text-base font-medium font-['Plus Jakarta Sans'] md:my-2">
+                                      <div className="text-center text-black text-base font-medium font-['Plus Jakarta Sans'] md:my-2">
                                         <div className="justify-center h-[51.79px] items-center flex">
-                                          <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-emerald-400 rounded-full items-center mx-2">
+                                          <div className="w-[29.793px] h-[29.793px] top-[2px] bg-primary rounded-full items-center mx-2">
                                             <img
                                               src="src/assets/airplane.svg"
                                               className=" w-full h-full "
@@ -985,17 +978,20 @@ const Index: React.FC = () => {
                                           </div>
                                         </div>
                                       </div>
-                                      <div className="text-center text-[#111] text-base font-medium font-['Plus Jakarta Sans'] mx-0 md:mx-4">
+                                      <div className="text-center text-black text-base font-medium font-['Plus Jakarta Sans'] mx-0 md:mx-4">
                                         <button
                                           onClick={() => {
                                             navigate("/trips-detail");
                                           }}
-                                          className="my-4 justify-center rounded-md bg-white disabled:bg-gray-400 hover:text-base font-bold leading-6 text-primary-dark"
+                                          className="my-4 flex gap-2 items-center hover:text-base font-bold leading-6 text-primary-dark"
                                         >
-                                          <p className="text-center text-primary text-sm md:text-base font-bold font-['Plus Jakarta Sans'] md:p-2 ">
+                                          <p className="text-primary text-sm md:text-base font-semibold font-['Plus Jakarta Sans'] md:p-2 ">
                                             Details{" "}
-                                            <RightOutlined className="ml-1 md:ml-5" />
                                           </p>
+                                          <img
+                                            src="/assets/chevron-right.svg"
+                                            alt="w-4 h04"
+                                          />
                                         </button>
                                       </div>
                                     </Card.Grid>

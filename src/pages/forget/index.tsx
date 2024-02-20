@@ -190,17 +190,17 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className="grid grid-cols-2">
-      <div className="h-screen flex">
+    <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="hidden md:block h-screen">
         <img
           src="src/assets/sign-in.png"
           alt="Sign In Image"
           className="w-full rounded p-10 object-contain "
         />
       </div>
-      <div className="h-screen flex">
+      <div className="h-screen flex mx-3 md:mx-5">
         {step == 1 ? (
-          <div className="self-center ">
+          <div className="self-start md:self-center mt-5 md:mt-0">
             <h1 className="text-left text-4xl mb-8 font-semibold">
               Forgot your Password?
             </h1>
@@ -241,7 +241,7 @@ const Index: React.FC = () => {
                     disabled={disabledSave}
                     className="flex w-full  mb-4 justify-center rounded-md active:bg-primary disabled:bg-gray-300 bg-primary hover:bg-primary-dark px-3 py-1.5 text-base font-bold leading-6 text-white shadow-sm"
                   >
-                    <p className="p-2">Send Instruction</p>
+                    Send Instruction
                   </button>
                 </div>
               </Form.Item>

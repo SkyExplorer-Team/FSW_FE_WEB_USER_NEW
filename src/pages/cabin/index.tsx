@@ -105,10 +105,10 @@ const AppLayout: React.FC = () => {
               <p className="text-neutral-link text-lg font-normal font-['Plus Jakarta Sans'] leading-7 mt-5 md:mt-0">
                 More in Cabin
               </p>
-              <div className="mt-5 flex-row md:flex-col overflow-x-auto md:overflow-hidden gap-3">
+              <div className="mt-5 flex-row md:flex-col overflow-x-auto md:overflow-hidden gap-[24px]">
                 <a href="#" className="relative mb-0 md:mb-5">
                   <img
-                    src="/public/assets/cabin-first-class.png"
+                    src="/assets/cabin-first-class.png"
                     alt="Link Gambar First Class"
                     className="w-[280px] h-[160px] rounded-xl"
                   />

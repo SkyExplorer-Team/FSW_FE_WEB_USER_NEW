@@ -24,10 +24,10 @@ import PassengerField from "../components/passenger_field";
 import CabinField from "../components/cabin_field";
 import HomeInfo1 from "../components/home_info1";
 import HomeFooter from "../components/home_footer";
-import Chevron from "../../public/assets/chevron-down.svg";
-import ChevronClicked from "../../public/assets/chevron-clicked.svg";
-import IconMenu from "../../public/assets/menu.svg";
-import IconUser from "../../public/assets/user.svg";
+import Chevron from "/assets/chevron-down.svg";
+import ChevronClicked from "/assets/chevron-clicked.svg";
+import IconMenu from "/assets/menu.svg";
+import IconUser from "/assets/user.svg";
 import HeaderComponent from "../components/Header";
 
 dayjs.extend(customParseFormat);
