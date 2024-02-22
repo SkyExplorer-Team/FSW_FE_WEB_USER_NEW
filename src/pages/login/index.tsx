@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Form, Input, Modal, Typography } from "antd";
+import { Button, Form, Input, Modal, Typography } from "antd/lib";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { ValidateStatus } from "antd/lib/form/FormItem";
@@ -8,7 +8,6 @@ import PrivacyPolicyModal from "../../components/PrivacyPolicyModal";
 
 import GoogleSvg from "../../assets/google.svg";
 const { Text } = Typography;
-// const api_base_url = "https://be-java-master-production.up.railway.app"
 
 const SignIn: React.FC = () => {
   const navigate = useNavigate();

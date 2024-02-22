@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Card, ConfigProvider, Layout, Tabs, Pagination } from "antd/lib";
 const { TabPane } = Tabs;
-import { MenuProps } from "antd/lib";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { useNavigate } from "react-router-dom";
 import HomeFooter from "../../components/home_footer";
 import HomeNavSide from "../../components/home_navside";
-import ProfileMenu from "../../components/ProfileMenu";
 import HeaderComponent from "../../components/Header";
 
 dayjs.extend(customParseFormat);
 
 const { Content, Footer } = Layout;
 
-const api_base_url = "https://be-java-master-production.up.railway.app";
-
-const menu = <ProfileMenu />;
+const api_base_url =
+  "https://be-java-master-production.up.railway.app/api/swagger-ui/index.html";
 
 const cardStyle = {
   borderRadius: "12px",
@@ -64,7 +61,7 @@ interface Booking {
 }
 
 const Index: React.FC = () => {
-  const token = localStorage.getItem("access_token");
+  // const token = localStorage.getItem("access_token");
 
   let airports: Airport[] = [];
   const fromAirportDetails: { label: string; value: string }[] = [];
@@ -473,35 +470,8 @@ const Index: React.FC = () => {
     currentPageExpired * pageSize
   );
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-  ];
-
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          // Seed Token
-          colorPrimary: "#38A993",
-          borderRadius: 2,
-          colorPrimaryTextHover: "#38A993",
-
-          // Alias Token
-          colorBgContainer: "#f6ffed",
-        },
-      }}
-    >
+    <ConfigProvider>
       <Layout>
         <HeaderComponent />
         <Content>

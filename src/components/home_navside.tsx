@@ -1,6 +1,34 @@
 import React from "react";
+import { Modal } from "antd/lib";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomeNavSide: React.FC = () => {
+  const navigate = useNavigate();
+  const showSignOutConfirmation = () => {
+    Modal.confirm({
+      title: <div style={{}}>Sign Out</div>,
+      centered: false,
+      icon: null,
+      content: <div style={{}}>Are you sure you want to sign out?</div>,
+      okText: "Sign Out",
+      cancelText: "Cancel",
+      okButtonProps: {
+        className: "bg-primary hover:bg-primary-dark text-white mx-auto",
+      },
+      cancelButtonProps: {
+        className:
+          "bg-primary-background text-primary mx-auto hover:border-primary text-primary-dark",
+      },
+      onOk: () => handleSignOut(),
+    });
+  };
+  const handleSignOut = () => {
+    // Clear the token or perform any other sign-out logic here
+    localStorage.removeItem("accessToken");
+
+    // Redirect to the login page
+    navigate("/login");
+  };
   return (
     <div className="hidden xl:block col-start-2 col-span-2 py-6  bg-white rounded-[16px] shadow border border-gray-200 flex-col justify-center items-center gap-4">
       <div className="grid grid-cols-12 gap-4">
@@ -10,7 +38,7 @@ const HomeNavSide: React.FC = () => {
             alt="Gambar Profil Dummy"
             className="my-4"
           />
-          <div className="font-semibold text-lg font-normal font-['Plus Jakarta Sans'] text-xl leading-7 text-[#227879]">
+          <div className="font-semibold text-lg  font-['Plus Jakarta Sans'] text-xl leading-7 text-[#227879]">
             Lewis Carl Davidson
           </div>
           <div className="text-neutral-500 text-md font-normal font-['Plus Jakarta Sans']  text-[#485466]">
@@ -20,7 +48,7 @@ const HomeNavSide: React.FC = () => {
         <div className="col-start-1 col-end-12">
           <div className="  bg-white text-sm leading-6 ring-gray-900/5">
             <div className="p-4">
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-white group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,15 +100,15 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <a
-                    href="#"
+                  <Link
+                    to="/trips"
                     className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
                   >
                     Trips
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -106,15 +134,15 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <a
-                    href="#"
+                  <Link
+                    to="/profile"
                     className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
                   >
                     Profile
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -147,15 +175,15 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <a
-                    href="#"
+                  <Link
+                    to="/notifications"
                     className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
                   >
                     Notifications
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -188,15 +216,15 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <a
-                    href="#"
+                  <Link
+                    to="/saved-travelers"
                     className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
                   >
                     Saved Travelers
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -222,15 +250,15 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <a
-                    href="#"
+                  <Link
+                    to="/account-settings"
                     className="font-medium text-base text-[#677084]  group-hover:text-[#227879]"
                   >
                     Account Settings
-                  </a>
+                  </Link>
                 </div>
               </div>
-              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center items-center">
+              <div className="group relative flex gap-3 rounded-lg p-3 hover:bg-[#EAFDF6] items-center cursor-pointer">
                 <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg group-hover:bg-[#EAFDF6]">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +291,10 @@ const HomeNavSide: React.FC = () => {
                   </svg>
                 </div>
                 <div className="items-center">
-                  <p className="font-medium text-base text-[#677084] group-hover:text-[#227879]">
+                  <p
+                    className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
+                    onClick={showSignOutConfirmation}
+                  >
                     Sign Out
                   </p>
                 </div>

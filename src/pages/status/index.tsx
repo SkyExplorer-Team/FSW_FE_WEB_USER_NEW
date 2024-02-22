@@ -1,41 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
-import Logo from "../../components/Logo";
 import {
   Button,
-  ConfigProvider,
   DatePicker,
   DatePickerProps,
-  Divider,
-  Dropdown,
   Layout,
   Radio,
   RadioChangeEvent,
   Select,
-  Space,
-} from "antd";
-import { MenuProps } from "antd/lib";
-import {
-  DownOutlined,
-  TeamOutlined,
-  DollarOutlined,
-  SwapOutlined,
-} from "@ant-design/icons";
+} from "antd/lib";
+import { SwapOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import ReactCountryFlag from "react-country-flag";
 import { useNavigate } from "react-router-dom";
-import PassengerField from "../../components/passenger_field";
-import CabinField from "../../components/cabin_field";
-import SkeletonAvatar from "antd/lib/skeleton/Avatar";
 import HeaderComponent from "../../components/Header";
 import HomeInfo1 from "../../components/home_info1";
 import HomeFooter from "../../components/home_footer";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
-const api_base_url = "https://be-java-master-production.up.railway.app";
+const api_base_url = "https://be-java-master-production.up.railway.app/api";
 
 interface Airport {
   id: string;
@@ -45,8 +30,6 @@ interface Airport {
 }
 
 const StatusPage: React.FC = () => {
-  const token = localStorage.getItem("access_token");
-
   let airports: Airport[] = [];
   let fromAirportDetails: { label: string; value: string }[] = [];
   let toAirportDetails: { label: string; value: string }[] = [];
@@ -57,7 +40,7 @@ const StatusPage: React.FC = () => {
   async function fetchInitialAirport() {
     const payload = {};
 
-    const response = await fetch(api_base_url + "/api/airport", {
+    const response = await fetch(api_base_url + "/airport", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -92,7 +75,7 @@ const StatusPage: React.FC = () => {
     });
   });
 
-  const [seat, setSeat] = useState(
+  const [seat] = useState(
     new Map<string, number>([
       ["adults", 0],
       ["children", 0],
@@ -100,7 +83,7 @@ const StatusPage: React.FC = () => {
     ])
   );
 
-  const [cabin, setCabin] = useState<number>(1);
+  const [cabin] = useState<number>(1);
 
   //   const changeSeats = (targetMap: Map<string, number>) => {
   //     setSeat(targetMap);
@@ -157,21 +140,6 @@ const StatusPage: React.FC = () => {
     input: string,
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
-
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="/">
-          Items
-        </a>
-      ),
-    },
-  ];
-
-  const handleSignUp = () => {
-    navigate("/signup");
-  };
 
   const handleSearch = async () => {
     navigate("/status_result", {

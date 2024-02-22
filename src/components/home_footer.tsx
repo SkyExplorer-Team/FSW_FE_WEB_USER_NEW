@@ -32,7 +32,7 @@ const HomeFooter: React.FC = () => {
             <div className="col-end-13 xl: col-start-1 xl:col-end-5 py-6  bg-white rounded-[16px] flex-col justify-center items-center gap-4">
               <div className="h-[150px] flex-col justify-between items-start inline-flex">
                 <div className="flex-col justify-center items-start gap-2 flex">
-                  <Logo></Logo>
+                  <Logo />
                   <div className="self-stretch text-left text-gray-500 text-sm font-normal font-['Plus Jakarta Sans'] leading-tight">
                     Navigate the Skies, Booking Made Easy{" "}
                   </div>

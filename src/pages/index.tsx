@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../components/Logo";
 import {
   Button,
   ConfigProvider,
@@ -14,11 +13,10 @@ import {
   Select,
   Space,
 } from "antd";
-import { MenuProps } from "antd/lib";
+
 import { TeamOutlined, DollarOutlined, SwapOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import ReactCountryFlag from "react-country-flag";
 import { useNavigate } from "react-router-dom";
 import PassengerField from "../components/passenger_field";
 import CabinField from "../components/cabin_field";
@@ -26,13 +24,11 @@ import HomeInfo1 from "../components/home_info1";
 import HomeFooter from "../components/home_footer";
 import Chevron from "/assets/chevron-down.svg";
 import ChevronClicked from "/assets/chevron-clicked.svg";
-import IconMenu from "/assets/menu.svg";
-import IconUser from "/assets/user.svg";
 import HeaderComponent from "../components/Header";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const api_base_url = "https://be-java-master-production.up.railway.app";
 
@@ -49,9 +45,6 @@ const Index: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
   const [airports, setAirports] = useState<Airport[]>([]);
   const [airportDetails, setAirportDetails] = useState<
     { label: string; value: string }[]
@@ -68,7 +61,7 @@ const Index: React.FC = () => {
   const [departureDate, setdepartureDate] = useState<dayjs.Dayjs>(dayjs());
   const [returnDate, setReturnDate] = useState<dayjs.Dayjs>(dayjs());
 
-  const [userName, setUserName] = useState<string>("");
+  const [, setUserName] = useState<string>("");
 
   const accessToken = localStorage.getItem("access_token");
   async function fetchName() {
@@ -195,21 +188,6 @@ const Index: React.FC = () => {
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="/">
-          Items
-        </a>
-      ),
-    },
-  ];
-
-  const handleSignUp = () => {
-    navigate("/signup");
-  };
-
   const handleSearch = async () => {
     // navigate("/result", {
     //     state: {
@@ -223,10 +201,6 @@ const Index: React.FC = () => {
     //     },
     // });
     showModal();
-  };
-
-  const handleStatus = () => {
-    navigate("/status");
   };
 
   const [trip, setTrip] = useState<string>("one-way");

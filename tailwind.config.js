@@ -27,6 +27,7 @@ export default {
           dark: "#AC5200",
         },
         error: {
+          background: "#FADED1",
           light: "#ec8574",
           DEFAULT: "#c81a23",
         },

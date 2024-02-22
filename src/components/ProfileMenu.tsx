@@ -1,5 +1,5 @@
 import React from "react";
-import { Menu } from "antd";
+import { Menu } from "antd/lib";
 import {
   HomeOutlined,
   UserOutlined,
@@ -8,8 +8,27 @@ import {
   SettingOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProfileMenu: React.FC = () => {
+  const navigate = useNavigate();
+
+
+  const handleProfile = () => {
+    navigate("/profile");
+  };
+
+  const handleNotifications = () => {
+    navigate("/notifications");
+  };
+
+  const handleSavedTravelers = () => {
+    navigate("/saved-travelers");
+  };
+
+  const handleAccountSettings = () => {
+    navigate("/account-settings");
+  };
   return (
     <Menu>
       <Menu.Item className="px-2" key="1">
@@ -18,12 +37,12 @@ const ProfileMenu: React.FC = () => {
             <HomeOutlined />
           </div>
           <div className="flex items-center justify-center text-center">
-            <a
-              href="#"
+            <Link
+              to="/trips"
               className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
             >
               Trips
-            </a>
+            </Link>
           </div>
         </div>
       </Menu.Item>
@@ -33,12 +52,13 @@ const ProfileMenu: React.FC = () => {
             <UserOutlined />
           </div>
           <div className="flex items-center justify-center text-center">
-            <a
-              href="#"
+            <Link
+              onClick={handleProfile}
+              to="/profile"
               className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
             >
               Profile
-            </a>
+            </Link>
           </div>
         </div>
       </Menu.Item>
@@ -48,12 +68,13 @@ const ProfileMenu: React.FC = () => {
             <BellOutlined />
           </div>
           <div className="flex items-center justify-center text-center">
-            <a
-              href="#"
+            <Link
+              to="/notifications"
+              onClick={handleNotifications}
               className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
             >
               Notifications
-            </a>
+            </Link>
           </div>
         </div>
       </Menu.Item>
@@ -63,12 +84,13 @@ const ProfileMenu: React.FC = () => {
             <TeamOutlined />
           </div>
           <div className="flex items-center justify-center text-center">
-            <a
-              href="#"
+            <Link
+              to="/saved-travelers"
+              onClick={handleSavedTravelers}
               className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
             >
               Saved Travelers
-            </a>
+            </Link>
           </div>
         </div>
       </Menu.Item>
@@ -78,12 +100,13 @@ const ProfileMenu: React.FC = () => {
             <SettingOutlined />
           </div>
           <div className="flex items-center justify-center text-center">
-            <a
-              href="#"
+            <Link
+              to="/account-settings"
+              onClick={handleAccountSettings}
               className="font-medium text-base text-[#677084] group-hover:text-[#227879]"
             >
               Account Settings
-            </a>
+            </Link>
           </div>
         </div>
       </Menu.Item>

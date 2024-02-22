@@ -2,8 +2,8 @@
 import React from "react";
 import Dots from "/assets/dots.svg";
 import IconAirplane from "/assets/icon-airplane.svg";
-import ChevronRight from "/public/assets/chevron-right.svg";
-import Airplane from "/public/assets/airplane.svg";
+import ChevronRight from "/assets/chevron-right.svg";
+import Airplane from "/assets/airplane.svg";
 
 interface FlightCardProps {
   time: string;

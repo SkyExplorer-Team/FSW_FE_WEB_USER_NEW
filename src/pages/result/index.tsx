@@ -73,7 +73,7 @@ interface ScheduleResult {
   timeArrive: string[];
   price: number;
 }
-const api_base_url = "https://be-java-master-production.up.railway.app";
+const api_base_url = "https://be-java-master-production.up.railway.app/api";
 
 const accessToken = localStorage.getItem("access_token");
 
@@ -128,7 +128,7 @@ const Index: React.FC = () => {
     myHeaders.append("Authorization", "Bearer " + accessToken);
     myHeaders.append("Content-Type", "application/json");
 
-    const response = await fetch(api_base_url + "/api/users/me", {
+    const response = await fetch(api_base_url + "/users/me", {
       method: "get",
       headers: myHeaders,
     });
@@ -147,7 +147,7 @@ const Index: React.FC = () => {
     myHeaders.append("Authorization", "Bearer " + accessToken);
     myHeaders.append("Content-Type", "application/json");
 
-    const response = await fetch(api_base_url + "/api/airport", {
+    const response = await fetch(api_base_url + "/airport", {
       method: "get",
       headers: myHeaders,
     });
@@ -265,7 +265,7 @@ const Index: React.FC = () => {
   const handleSearch = async () => {
     console.log("Searching...", dayjs.isDayjs(departureDate));
     //case found:
-    const url = new URL(api_base_url + "/api/schedule-detail/getSchedules");
+    const url = new URL(api_base_url + "/schedule-detail/getSchedules");
     url.searchParams.append("cabinClassId", cabinClass[0].id);
     url.searchParams.append("ticketTypeId", ticketType[0].id);
     url.searchParams.append("date", departureDate?.format("YYYY-MM-DD") ?? "");

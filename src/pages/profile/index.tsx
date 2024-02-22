@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "../../styles/StylesProfile.css";
 import PersonalInfo from "./PersonalInfo";
 import TravelDocument from "./TravelDocument";
 import { ConfigProvider, Layout, Menu, MenuProps } from "antd/lib";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { useNavigate } from "react-router-dom";
 import HomeFooter from "../../components/home_footer";
 import HomeNavSide from "../../components/home_navside";
 import HeaderComponent from "../../components/Header";
@@ -25,13 +24,7 @@ dayjs.extend(customParseFormat);
 
 const { Content, Footer } = Layout;
 
-const api_base_url = "https://be-java-master-production.up.railway.app";
-
 const Index: React.FC = () => {
-  const navigate = useNavigate();
-
-  const token = localStorage.getItem("access_token");
-
   const [activeNavigation, setActiveNavigation] = useState("personalInfo");
   const [current, setCurrent] = useState("personalInfo"); // Updated default value
   const [formValues, setFormValues] = useState({
@@ -81,7 +74,7 @@ const Index: React.FC = () => {
           <div className="my-5">
             <div className="grid grid-cols-10 gap-5">
               <HomeNavSide />
-              <div className="col-start-1 col-span-10 xl:col-start-4 xl:col-span-6 px-4 md:px-8 py-3 bg-white rounded-[16px] border border-gray-200 flex-col justify-center items-start inline-flex">
+              <div className="col-start-1 col-span-10 xl:col-start-4 xl:col-span-6 px-8 py-3 bg-white rounded-[16px] border border-gray-200 flex-col justify-center items-start inline-flex">
                 <div className="flex w-full justify-between items-center text-start font-['Plus Jakarta Sans']  mb-6">
                   <h1 className="text-black font-medium text-3xl">Profile</h1>
                   <button

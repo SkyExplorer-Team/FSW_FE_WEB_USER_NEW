@@ -8,7 +8,7 @@ import GambarCabin1 from "/public/assets/cabin-1.png";
 import GambarCabin2 from "/public/assets/cabin-2.png";
 import GambarCabin3 from "/public/assets/cabin-3.png";
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const AppLayout: React.FC = () => {
   const navigate = useNavigate();

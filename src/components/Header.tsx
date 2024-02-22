@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import Logo from "../components/Logo";
 import { Layout, Dropdown } from "antd";
 import ReactCountryFlag from "react-country-flag";
-import Chevron from "../../public/assets/chevron-down.svg";
-import IconMenu from "../../public/assets/menu.svg";
-import IconUser from "../../public/assets/user.svg";
+import Chevron from "/assets/chevron-down.svg";
+import IconMenu from "/assets/menu.svg";
+import IconUser from "/assets/user.svg";
 import { useNavigate } from "react-router-dom";
 import { MenuProps } from "antd/lib";
 import dayjs from "dayjs";
@@ -15,7 +15,8 @@ dayjs.extend(customParseFormat);
 
 const { Header } = Layout;
 
-const api_base_url = "https://be-java-master-production.up.railway.app";
+const api_base_url = "https://be-java-master-production.up.railway.app/api";
+// const api_base_url = "https://be-java-production.up.railway.app";
 
 const HeaderComponent: React.FC = () => {
   const token = localStorage.getItem("access_token");
@@ -55,7 +56,7 @@ const HeaderComponent: React.FC = () => {
       myHeaders.append("Authorization", "Bearer " + token!);
       myHeaders.append("Content-Type", "application/json");
 
-      const response = await fetch(api_base_url + "/api/users/me", {
+      const response = await fetch(api_base_url + "/users/me", {
         method: "get",
         headers: myHeaders,
       });
@@ -81,12 +82,55 @@ const HeaderComponent: React.FC = () => {
     navigate("/status");
   };
 
-  const items: MenuProps["items"] = [
+  const CabinItems: MenuProps["items"] = [
     {
-      key: "1",
+      key: "cabin-1",
       label: (
         <a target="_blank" rel="noopener noreferrer" href="/">
-          Items
+          Economy
+        </a>
+      ),
+    },
+    {
+      key: "cabin-2",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="/">
+          Bussiness
+        </a>
+      ),
+    },
+    {
+      key: "cabin-3",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="/">
+          First
+        </a>
+      ),
+    },
+  ];
+
+  const BaggageItems: MenuProps["items"] = [
+    {
+      key: "baggage-1",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="/">
+          Checked Baggage
+        </a>
+      ),
+    },
+    {
+      key: "baggage-2",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="/">
+          Cabin Baggage
+        </a>
+      ),
+    },
+    {
+      key: "baggage-3",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" href="/">
+          Fare Types
         </a>
       ),
     },
@@ -95,6 +139,20 @@ const HeaderComponent: React.FC = () => {
   const handleSignUp = () => {
     navigate("/signup");
   };
+
+  const [, setIsMobile] = useState<boolean>(false);
+
+  const handleWindowResize = () => {
+    setIsMobile(window.innerWidth <= 768);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleWindowResize);
+    handleWindowResize(); // Mengecek ukuran jendela saat pertama kali dimuat
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   return (
     <Header
@@ -124,7 +182,7 @@ const HeaderComponent: React.FC = () => {
             </div>
             <Dropdown
               className="flex hover:text-primary text-neutral-900 text-lg font-medium font-['Plus Jakarta Sans'] leading-7"
-              menu={{ items }}
+              menu={{ items: CabinItems }}
             >
               <button
                 onClick={(e) => e.preventDefault()}
@@ -136,7 +194,7 @@ const HeaderComponent: React.FC = () => {
             </Dropdown>
             <Dropdown
               className="flex hover:text-primary text-neutral-900 text-lg font-medium font-['Plus Jakarta Sans'] leading-7 "
-              menu={{ items }}
+              menu={{ items: BaggageItems }}
             >
               <button
                 onClick={(e) => e.preventDefault()}
@@ -168,7 +226,7 @@ const HeaderComponent: React.FC = () => {
               {userName}
               <img src={IconMenu} alt="Icon Menu" className="h-4 w-4" />
               <Dropdown
-                visible={isProfileMenuVisible}
+                open={isProfileMenuVisible}
                 overlay={menu}
                 placement="bottomRight"
                 trigger={[]}

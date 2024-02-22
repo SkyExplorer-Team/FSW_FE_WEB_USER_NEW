@@ -3,27 +3,16 @@ import {
   Button,
   DatePicker,
   DatePickerProps,
-  Dropdown,
   Layout,
   Pagination,
-  PaginationProps,
   Radio,
   RadioChangeEvent,
   Select,
-} from "antd";
-import { MenuProps } from "antd/lib";
-import {
-  DownOutlined,
-  SwapOutlined,
-  // TeamOutlined,
-  // DollarOutlined,
-} from "@ant-design/icons";
+} from "antd/lib";
+import { SwapOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import ReactCountryFlag from "react-country-flag";
-import { useLocation, useNavigate } from "react-router-dom";
-import SkeletonAvatar from "antd/lib/skeleton/Avatar";
-import Logo from "../../components/Logo";
+import { useLocation } from "react-router-dom";
 import HeaderComponent from "../../components/Header";
 import HomeFooter from "../../components/home_footer";
 import IconInfo from "/assets/info-circle.svg";
@@ -34,7 +23,7 @@ import StatusFlightDetail from "../../components/StatusFlightDetail";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 interface Airport {
   nationalId: string;
   name: string;
@@ -50,11 +39,9 @@ interface Schedule {
   arrivalDate: dayjs.Dayjs;
   duration: number;
 }
-const api_base_url = "https://be-java-master-production.up.railway.app";
+const api_base_url = "https://be-java-master-production.up.railway.app/api";
 
 const StatusResult: React.FC = () => {
-  const token = localStorage.getItem("access_token");
-  const navigate = useNavigate();
   let fromAirportDetails: { label: string; value: string }[] = [];
   let toAirportDetails: { label: string; value: string }[] = [];
   let fromAirport!: Airport;
@@ -63,7 +50,7 @@ const StatusResult: React.FC = () => {
   let returnDate: dayjs.Dayjs;
   let schedules: Schedule[] = [];
   const airports: Airport[] = [];
-  const [seat, setSeat] = useState(
+  const [, setSeat] = useState(
     new Map<string, number>([
       ["adults", 0],
       ["children", 0],
@@ -71,9 +58,7 @@ const StatusResult: React.FC = () => {
     ])
   );
   const [page, setPage] = useState<number>(1);
-  const [scheduleToRender, setScheduleToRender] = useState<Schedule[]>(
-    schedules.slice(0, 3)
-  );
+  const [, setScheduleToRender] = useState<Schedule[]>(schedules.slice(0, 3));
   const [trip, setTrip] = useState<string>("one-way");
 
   useEffect(() => {
@@ -93,7 +78,7 @@ const StatusResult: React.FC = () => {
       to: toAirport.nationalId,
       departure: departureDate.format("YYYY-MM-DD HH:mm:ss.sss"),
     };
-    const response = await fetch(api_base_url + "/api/airport", {
+    const response = await fetch(api_base_url + "/airport", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -108,31 +93,6 @@ const StatusResult: React.FC = () => {
     console.log(responseJson);
     console.log("responseJson");
   }
-
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="/">
-          Items
-        </a>
-      ),
-    },
-  ];
-
-  const handleSignUp = () => {
-    navigate("/signup");
-  };
-
-  const [cabin, setCabin] = useState<number>(1);
-
-  const changeSeats = (targetMap: Map<string, number>) => {
-    setSeat(targetMap);
-  };
-
-  const changeCabin = (target: number) => {
-    setCabin(target);
-  };
 
   const onDepartureDatePick: DatePickerProps["onChange"] = (date) => {
     departureDate = date!;
@@ -202,11 +162,6 @@ const StatusResult: React.FC = () => {
     // implement get schedules ==============
     schedules = responseJson["schedules"];
     setPage(1);
-    setScheduleToRender(schedules.slice((page - 1) * 4, page * 4 - 1));
-  };
-  const onChangePage: PaginationProps["onShowSizeChange"] = (current) => {
-    console.log(page);
-    setPage(current);
     setScheduleToRender(schedules.slice((page - 1) * 4, page * 4 - 1));
   };
 

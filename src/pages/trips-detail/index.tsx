@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from "../../components/Logo";
-import {
-  ConfigProvider,
-  Dropdown,
-  Layout,
-  Collapse,
-  Modal,
-  Menu,
-  Table,
-} from "antd";
-import { MenuProps } from "antd/lib";
+import { ConfigProvider, Layout, Collapse, Modal, Table } from "antd/lib";
 import { DownOutlined, CloseOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -17,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import HomeFooter from "../../components/home_footer";
 import HomeNavSide from "../../components/home_navside";
 import QRCode from "qrcode.react";
-import ProfileMenu from "../../components/ProfileMenu";
+
 import HeaderComponent from "../../components/Header";
 
 dayjs.extend(customParseFormat);
 
-const { Header, Content, Footer } = Layout;
+const { Content, Footer } = Layout;
 
 const api_base_url = "https://be-java-master-production.up.railway.app";
 
@@ -65,7 +55,7 @@ interface BookingDetail {
 }
 
 const Index: React.FC = () => {
-  const token = localStorage.getItem("access_token");
+  // const token = localStorage.getItem("access_token");
 
   let airports: Airport[] = [];
   const fromAirportDetails: { label: string; value: string }[] = [];
@@ -160,7 +150,7 @@ const Index: React.FC = () => {
   async function fetchInitialAirport() {
     const payload = {};
 
-    const response = await fetch(api_base_url + "/api/booking", {
+    const response = await fetch(`${api_base_url}/api/booking`, {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
@@ -168,7 +158,7 @@ const Index: React.FC = () => {
     console.log(response);
     const responseJson = await response.json();
     if (response.status !== 200) {
-      alert("error: " + responseJson.message);
+      alert(`error: ${responseJson.message}`);
       return;
     }
     // make Sure this ok ==============
@@ -191,35 +181,8 @@ const Index: React.FC = () => {
   const [boardingPassModal, setBoardingPassModal] = useState(false);
   const [invoiceModal, setInvoiceModal] = useState(false);
 
-  const items: MenuProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
-          1st menu item
-        </a>
-      ),
-    },
-  ];
-
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          // Seed Token
-          colorPrimary: "#38A993",
-          borderRadius: 2,
-          colorPrimaryTextHover: "#38A993",
-
-          // Alias Token
-          colorBgContainer: "#f6ffed",
-        },
-      }}
-    >
+    <ConfigProvider>
       <Layout>
         <HeaderComponent />
         <Content>
@@ -285,7 +248,7 @@ const Index: React.FC = () => {
                         <hr className="w-[95%] border-t-2 border border-[#EAECF0] mx-auto my-3" />
                         <button
                           onClick={() => setBoardingPassModal(true)}
-                          className="m-3 w-[90%] flex items-center justify-center rounded-md border border-primary border-[2px] hover:border-primary-dark bg-white hover:bg-white-dark text-primary hover:text-primary-dark font-bold leading-6 text-sm p-4"
+                          className="m-3 w-[90%] flex items-center justify-center rounded-md border-primary border-[2px] hover:border-primary-dark bg-white hover:bg-white-dark text-primary hover:text-primary-dark font-bold leading-6 text-sm p-4"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -356,7 +319,7 @@ const Index: React.FC = () => {
                         </button>
                         <button
                           onClick={() => setInvoiceModal(true)}
-                          className="m-3 w-[90%] flex items-center justify-center rounded-md border border-primary border-[2px] hover:border-primary-dark bg-white hover:bg-white-dark text-primary hover:text-primary-dark font-bold leading-6 text-sm p-4"
+                          className="m-3 w-[90%] flex items-center justify-center rounded-md border-primary border-[2px] hover:border-primary-dark bg-white hover:bg-white-dark text-primary hover:text-primary-dark font-bold leading-6 text-sm p-4"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -402,7 +365,7 @@ const Index: React.FC = () => {
                       </div>
                       <div className="w-full col-start-1 col-end-13  md:col-start-5 md:col-end-13 rounded-md border border-solid border-neutral-300 bg-surface-additionals-over-color-frame-light">
                         <div className="grid grid-cols-12 w-full">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-2">
+                          <div className="w-full col-start-1 col-end-6 flex group relative rounded-lg px-2">
                             <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -439,7 +402,7 @@ const Index: React.FC = () => {
                         </div>
                         <hr className="w-[95%] border-t-2 border border-[#EAECF0] mx-auto my-3" />
                         <div className="grid grid-cols-12 w-full px-3 pb-3">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-2">
+                          <div className="w-full col-start-1 col-end-6 flex group relative rounded-lg px-2">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-bold text-xs font-['Plus Jakarta Sans'] text-[#677084]">
                                 Departure
@@ -448,7 +411,7 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full p-3">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-2">
+                          <div className="w-full col-start-1 col-end-6 flex group relative rounded-lg px-2">
                             <div className="w-full">
                               <div className="grid grid-cols-5 gap-1">
                                 <div className="col-start-0 col-span-2 font-normal text-sm bg-white font-['Plus Jakarta Sans'] text-black justify-start items-center inline-flex">
@@ -488,7 +451,7 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full p-3">
-                          <div className="w-full col-start-1 col-end-8 flex group relative flex rounded-lg px-2">
+                          <div className="w-full col-start-1 col-end-8 flex group relative  rounded-lg px-2">
                             <div className="w-full grid grid-cols-7 gap-1">
                               <div className="col-start-0 col-span-3 font-normal text-sm bg-white font-['Plus Jakarta Sans'] text-black justify-start items-center inline-flex">
                                 {bookingDetail.schedule.departureDate.format(
@@ -515,7 +478,7 @@ const Index: React.FC = () => {
                     <div className="grid grid-cols-12 w-full my-4">
                       <div className="w-full col-start-1 col-end-13 rounded-md border border-solid border-neutral-300 bg-surface-additionals-over-color-frame-light">
                         <div className="grid grid-cols-12 w-full">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-2">
+                          <div className="w-full col-start-1 col-end-6 flex group relative  rounded-lg px-2">
                             <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -621,7 +584,7 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-12 flex group relative flex rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-12 flex group relative  rounded-lg px-4">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-normal text-sm text-[#354053]">
                                 {bookingDetail.user.salutation}{" "}
@@ -632,14 +595,14 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-6 flex group relative  rounded-lg px-4">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-semibold text-sm text-black">
                                 Seat
                               </p>
                             </div>
                           </div>
-                          <div className="w-full col-start-7 col-end-13 flex group relative flex rounded-lg px-4 item-end justify-end text-right">
+                          <div className="w-full col-start-7 col-end-13 flex group relative rounded-lg px-4 item-end justify-end text-right">
                             <div className="flex items-center ">
                               <p className="font-semibold text-sm text-black  text-right">
                                 {bookingDetail.seat}
@@ -648,14 +611,14 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-6 flex group relative  rounded-lg px-4">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-semibold text-sm text-black">
                                 Baggage
                               </p>
                             </div>
                           </div>
-                          <div className="w-full col-start-7 col-end-13 flex group relative flex rounded-lg px-4 item-end justify-end text-right">
+                          <div className="w-full col-start-7 col-end-13 flex group relative  rounded-lg px-4 item-end justify-end text-right">
                             <div className="flex items-center ">
                               <p className="font-semibold text-sm text-black  text-right">
                                 {bookingDetail.bagage}kg
@@ -664,14 +627,14 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-6 flex group relative  rounded-lg px-4">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-semibold text-sm text-black">
                                 Meal
                               </p>
                             </div>
                           </div>
-                          <div className="w-full col-start-7 col-end-13 flex group relative flex rounded-lg px-4 item-end justify-end text-right">
+                          <div className="w-full col-start-7 col-end-13 flex group relative rounded-lg px-4 item-end justify-end text-right">
                             <div className="flex items-center ">
                               <p className="font-semibold text-sm text-black  text-right">
                                 {bookingDetail.meal}
@@ -726,7 +689,7 @@ const Index: React.FC = () => {
                               </p>
                             </div>
                           </div>
-                          <div className="w-full col-start-7 col-end-13 flex group relative flex rounded-lg px-4 item-end justify-end text-right">
+                          <div className="w-full col-start-7 col-end-13 flex group relative  rounded-lg px-4 item-end justify-end text-right">
                             <div className="flex items-center ">
                               <p className="font-medium text-sm text-black text-right">
                                 {bookingDetail.status ? (
@@ -743,14 +706,14 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-6 flex group relative flex rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-6 flex group relative  rounded-lg px-4">
                             <div className="flex items-center justify-center text-center">
                               <p className="font-medium text-sm text-black">
                                 Booking ID
                               </p>
                             </div>
                           </div>
-                          <div className="w-full col-start-7 col-end-13 flex group relative flex rounded-lg px-4 item-end justify-end text-right">
+                          <div className="w-full col-start-7 col-end-13 flex group relative  rounded-lg px-4 item-end justify-end text-right">
                             <div className="flex items-center ">
                               <p className="font-medium text-sm text-black  text-right">
                                 {bookingDetail.id}
@@ -759,7 +722,7 @@ const Index: React.FC = () => {
                           </div>
                         </div>
                         <div className="grid grid-cols-12 w-full px-3 py-2">
-                          <div className="w-full col-start-1 col-end-6 flex group relative rounded-lg px-4">
+                          <div className="w-full col-start-1 col-end-6  group relative rounded-lg px-4">
                             <div className="flex items-start justify-center">
                               <p className="font-medium text-sm text-black">
                                 Total Transfer
@@ -788,17 +751,17 @@ const Index: React.FC = () => {
             title={
               <>
                 <div className="grid grid-cols-12 w-full px-6 rounded-t-md ">
-                  <div className="w-full col-start-1 col-end-2 flex group relative flex rounded-lg">
+                  <div className="w-full col-start-1 col-end-2 flex group relative  rounded-lg">
                     <div className="flex items-center justify-center text-center">
                       <button
                         onClick={() => setBoardingPassModal(false)}
-                        className="my-4 justify-center rounded-md text-black  hover:bg-grey text-base font-bold leading-6 text-white shadow-sm"
+                        className="my-4 justify-center rounded-md text-black  hover:bg-grey text-base font-bold leading-6 shadow-sm"
                       >
                         <CloseOutlined className="text-black" />
                       </button>
                     </div>
                   </div>
-                  <div className="w-full col-start-3 col-end-11 flex group relative flex rounded-lg  item-center justify-center text-center">
+                  <div className="w-full col-start-3 col-end-11 flex group relative  rounded-lg  item-center justify-center text-center">
                     <div className="flex items-center ">
                       <p className="font-semibold text-xl text-black  text-right">
                         Boarding Pass
@@ -825,7 +788,7 @@ const Index: React.FC = () => {
                         onClick={handleSignUp}
                         className="w-[85%] justify-center rounded-md bg-primary disabled:bg-gray-400 hover:bg-primary-dark text-base font-bold leading-6 text-white shadow-sm"
                       >
-                        <p className="flex group relative flex rounded-lg item-center justify-center text-center text-white text-base font-bold font-['Plus Jakarta Sans'] leading-normal text-lg font-bold p-4">
+                        <p className="flex group relative  rounded-lg item-center justify-center text-center text-white text-base font-bold font-['Plus Jakarta Sans'] leading-normal text-lg font-bold p-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -874,14 +837,14 @@ const Index: React.FC = () => {
             className="custom-modal"
           >
             <div className="grid grid-cols-12 w-full p-2 bg-[#D6FAE6] border-[#38A993] border-[2px]">
-              <div className="w-full col-start-1 col-end-13 flex group relative flex rounded-lg item-center justify-center text-center">
+              <div className="w-full col-start-1 col-end-13 flex group relative  rounded-lg item-center justify-center text-center">
                 <div className="flex items-center">
                   <p className="font-medium text-sm text-[#227879]  text-center">
                     Adult 1
                   </p>
                 </div>
               </div>
-              <div className="w-full col-start-1 col-end-13 flex group relative flex rounded-lg item-center justify-center text-center">
+              <div className="w-full col-start-1 col-end-13 flex group relative  rounded-lg item-center justify-center text-center">
                 <div className="flex items-center">
                   <p className="font-bold text-base text-[#227879]  text-center">
                     {bookingDetail.user.salutation}{" "}
@@ -891,7 +854,7 @@ const Index: React.FC = () => {
               </div>
             </div>
             <div className="grid grid-cols-12 w-full p-4 bg-[#F2F4F7]">
-              <div className="w-full col-start-1 col-end-13 flex group relative flex rounded-lg">
+              <div className="w-full col-start-1 col-end-13 flex group relative  rounded-lg">
                 <div className="w-full grid grid-cols-12">
                   <div className=" col-start-2 col-end-12 py-6 bg-white rounded-[12px] shadow border border-gray-200 flex-col justify-center items-center">
                     <div className="w-full grid grid-cols-12">
@@ -1116,17 +1079,17 @@ const Index: React.FC = () => {
             title={
               <>
                 <div className="grid grid-cols-12 w-full px-6 rounded-t-md ">
-                  <div className="w-full col-start-1 col-end-2 flex group relative flex rounded-lg">
+                  <div className="w-full col-start-1 col-end-2 flex group relative  rounded-lg">
                     <div className="flex items-center justify-center text-center">
                       <button
                         onClick={() => setInvoiceModal(false)}
-                        className="my-4 justify-center rounded-md text-black  hover:bg-grey text-base font-bold leading-6 text-white shadow-sm"
+                        className="my-4 justify-center rounded-md text-black  hover:bg-grey text-base font-bold leading-6 shadow-sm"
                       >
                         <CloseOutlined className="text-black" />
                       </button>
                     </div>
                   </div>
-                  <div className="w-full col-start-3 col-end-11 flex group relative flex rounded-lg  item-center justify-center text-center">
+                  <div className="w-full col-start-3 col-end-11 flex group relative  rounded-lg  item-center justify-center text-center">
                     <div className="flex items-center ">
                       <p className="font-semibold text-xl text-black  text-right">
                         Invoice
@@ -1153,7 +1116,7 @@ const Index: React.FC = () => {
                         onClick={handleSignUp}
                         className="w-[85%] justify-center rounded-md bg-primary disabled:bg-gray-400 hover:bg-primary-dark text-base font-bold leading-6 text-white shadow-sm"
                       >
-                        <p className="flex group relative flex rounded-lg item-center justify-center text-center text-white text-base font-bold font-['Plus Jakarta Sans'] leading-normal text-lg font-bold p-4">
+                        <p className="flex group relative  rounded-lg item-center justify-center text-center text-white text-base font-bold font-['Plus Jakarta Sans'] leading-normal text-lg font-bold p-4">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -1202,7 +1165,7 @@ const Index: React.FC = () => {
             className="custom-modal"
           >
             <div className="grid grid-cols-12 w-full p-4 bg-[#F2F4F7]">
-              <div className="w-full col-start-1 col-end-13 flex group relative flex rounded-lg">
+              <div className="w-full col-start-1 col-end-13 flex group relative  rounded-lg">
                 <div className="w-full grid grid-cols-12">
                   <div className=" col-start-2 col-end-12 py-6 bg-white rounded-[12px] shadow border border-gray-200 flex-col justify-center items-center">
                     <div className="w-full grid grid-cols-12">
