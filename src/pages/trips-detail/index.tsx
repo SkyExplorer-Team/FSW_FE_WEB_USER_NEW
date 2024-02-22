@@ -862,7 +862,7 @@ const Index: React.FC = () => {
                         <div className="justify-center items-center flex">
                           <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-emerald-400 rounded-full items-center">
                             <img
-                              src="src/assets/airplane.svg"
+                              src="/assets/airplane.svg"
                               className="w-full h-full"
                             ></img>
                           </div>
@@ -1173,7 +1173,7 @@ const Index: React.FC = () => {
                         <div className="justify-center items-center flex">
                           <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-emerald-400 rounded-full items-center">
                             <img
-                              src="src/assets/airplane.svg"
+                              src="/assets/airplane.svg"
                               className="w-full h-full"
                             ></img>
                           </div>

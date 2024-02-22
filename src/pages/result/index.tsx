@@ -498,7 +498,7 @@ const Index: React.FC = () => {
                           <>
                             <img
                               className="p-8 w-[430px]"
-                              src="src/assets/not-found.svg"
+                              src="/assets/not-found.svg"
                             ></img>
                           </>
                         }
@@ -572,7 +572,7 @@ const Index: React.FC = () => {
                           <>
                             <img
                               className="p-4 w-[430px]"
-                              src="src/assets/not-found.svg"
+                              src="/assets/not-found.svg"
                             ></img>
                           </>
                         }
@@ -820,7 +820,7 @@ const Index: React.FC = () => {
               <div className="flex-col ">
                 <img
                   className="p-8 m-auto w-[430px]"
-                  src="src/assets/not-found.svg"
+                  src="/assets/not-found.svg"
                 ></img>
               </div>
             ) : (

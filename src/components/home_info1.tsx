@@ -5,7 +5,7 @@ const HomeInfo1: React.FC = () => {
         <div className="flex flex-col md:flex-row border-b border-gray-100 justify-between items-center">
           <div className="flex-col justify-start items-center gap-[25px] inline-flex">
             <div className="relative bg-gradient-to-b from-emerald-100 to-white rounded-2xl border border-gray-100">
-              <img className="p-4" src="src/assets/search_1.svg"></img>
+              <img className="p-4" src="/assets/search_1.svg"></img>
             </div>
             <div className="flex-col justify-center items-center gap-4 flex">
               <div className="text-neutral-900 text-xl font-semibold font-['Plus Jakarta Sans'] leading-7">
@@ -19,7 +19,7 @@ const HomeInfo1: React.FC = () => {
           </div>
           <div className="flex-col justify-start items-center gap-[27px] inline-flex">
             <div className="relative bg-gradient-to-b from-emerald-100 to-white rounded-2xl border border-gray-100">
-              <img className="px-4" src="src/assets/take.svg"></img>
+              <img className="px-4" src="/assets/take.svg"></img>
             </div>
             <div className="flex-col justify-center items-center gap-4 flex">
               <div className="text-neutral-900 text-xl font-semibold font-['Plus Jakarta Sans'] leading-7">
@@ -33,7 +33,7 @@ const HomeInfo1: React.FC = () => {
           </div>
           <div className="flex-col justify-start items-center gap-7 inline-flex">
             <div className="relative bg-gradient-to-b from-emerald-100 to-white rounded-2xl border border-gray-100">
-              <img className="" src="src/assets/smooth.svg"></img>
+              <img className="" src="/assets/smooth.svg"></img>
             </div>
             <div className="flex-col justify-center items-center gap-4 flex">
               <div className="text-neutral-900 text-xl font-semibold font-['Plus Jakarta Sans'] leading-7">
@@ -50,7 +50,7 @@ const HomeInfo1: React.FC = () => {
       <div className=" py-12 ">
         <img
           className="block mr-auto ml-auto"
-          src="src/assets/download.svg"
+          src="/assets/download.svg"
           alt=""
         />
       </div>

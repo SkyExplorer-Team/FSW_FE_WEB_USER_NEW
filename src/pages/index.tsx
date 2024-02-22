@@ -235,7 +235,7 @@ const Index: React.FC = () => {
           <div>
             {/* div infront */}
             <div className="relative">
-              <img className="w-full" src="src/assets/Illustration.svg"></img>
+              <img className="w-full" src="/assets/Illustration.svg"></img>
               <div className="absolute w-full m-auto -bottom-[10%] snap-center self-center text-center ">
                 <div className=" p-6  bg-white rounded-[20px] shadow border border-gray-200 flex-col justify-center items-start gap-6 inline-flex">
                   <div className="self-stretch justify-start items-center gap-6 inline-flex">
@@ -370,7 +370,7 @@ const Index: React.FC = () => {
                                 <>
                                   <img
                                     className="p-8 w-[430px]"
-                                    src="src/assets/not-found.svg"
+                                    src="/assets/not-found.svg"
                                   ></img>
                                 </>
                               }
@@ -446,7 +446,7 @@ const Index: React.FC = () => {
                                 <>
                                   <img
                                     className="p-4 w-[430px]"
-                                    src="src/assets/not-found.svg"
+                                    src="/assets/not-found.svg"
                                   ></img>
                                 </>
                               }
@@ -609,7 +609,7 @@ const Index: React.FC = () => {
                   </div>
                   <div className="w-9 h-9 justify-center items-center flex">
                     <div className="w-9 h-9 relative">
-                      <img src="src/assets/arrow-right.svg"></img>
+                      <img src="/assets/arrow-right.svg"></img>
                     </div>
                   </div>
                   <div className="w-[100px] flex-col justify-start items-center inline-flex">

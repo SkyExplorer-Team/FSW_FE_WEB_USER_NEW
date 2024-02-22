@@ -193,7 +193,7 @@ const Index: React.FC = () => {
     <div className="grid grid-cols-1 md:grid-cols-2">
       <div className="hidden md:block h-screen">
         <img
-          src="src/assets/sign-in.png"
+          src="/assets/sign-in.png"
           alt="Sign In Image"
           className="w-full rounded p-10 object-contain "
         />

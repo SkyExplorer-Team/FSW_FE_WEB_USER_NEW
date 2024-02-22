@@ -132,7 +132,7 @@ const SignIn: React.FC = () => {
     <div className="flex flex-col md:flex-row gap-4">
       <div className=" md:w-screen-lg:w-1/2 sm:h-fit md:h-screen">
         <img
-          src="src/assets/sign-in.png"
+          src="/assets/sign-in.png"
           alt="Sign In Image"
           className="h-full rounded p-10 object-contain hidden md:block"
         />

@@ -493,7 +493,7 @@ const Index: React.FC = () => {
                         <div className="grid grid-cols-10">
                           <div className="col-start-4 col-span-4">
                             <img
-                              src="src/assets/background-complete.svg"
+                              src="/assets/background-complete.svg"
                               width={290}
                               height={210}
                               alt="Background"
@@ -689,7 +689,7 @@ const Index: React.FC = () => {
                                         <div className="justify-center h-[51.79px] items-center flex">
                                           <div className="w-[29.793px] h-[29.793px] top-[2px]  bg-primary rounded-full items-center mx-2">
                                             <img
-                                              src="src/assets/airplane.svg"
+                                              src="/assets/airplane.svg"
                                               className=" w-full h-full "
                                             ></img>
                                           </div>
@@ -742,7 +742,7 @@ const Index: React.FC = () => {
                         <div className="grid grid-cols-10">
                           <div className="col-start-4 col-span-4">
                             <img
-                              src="src/assets/background-complete.svg"
+                              src="/assets/background-complete.svg"
                               width={290}
                               height={210}
                               alt="Background"
@@ -939,7 +939,7 @@ const Index: React.FC = () => {
                                         <div className="justify-center h-[51.79px] items-center flex">
                                           <div className="w-[29.793px] h-[29.793px] top-[2px] bg-primary rounded-full items-center mx-2">
                                             <img
-                                              src="src/assets/airplane.svg"
+                                              src="/assets/airplane.svg"
                                               className=" w-full h-full "
                                             ></img>
                                           </div>

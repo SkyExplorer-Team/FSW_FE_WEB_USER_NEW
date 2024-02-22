@@ -167,7 +167,7 @@ const StatusPage: React.FC = () => {
       <Content>
         <div>
           <div className="relative">
-            <img className="w-full" src="src/assets/Illustration.svg"></img>
+            <img className="w-full" src="/assets/Illustration.svg"></img>
             <div className="absolute w-full m-auto -bottom-[10%] snap-center self-center text-center ">
               <div className=" p-6  bg-white rounded-[20px] shadow border border-gray-200 flex-col justify-center items-start gap-6 inline-flex">
                 <div className="self-stretch justify-start items-center gap-6 inline-flex">
@@ -230,7 +230,7 @@ const StatusPage: React.FC = () => {
                               <>
                                 <img
                                   className="p-8 w-[430px]"
-                                  src="src/assets/not-found.svg"
+                                  src="/assets/not-found.svg"
                                 ></img>
                               </>
                             }
@@ -286,7 +286,7 @@ const StatusPage: React.FC = () => {
                               <>
                                 <img
                                   className="p-4 w-[430px]"
-                                  src="src/assets/not-found.svg"
+                                  src="/assets/not-found.svg"
                                 ></img>
                               </>
                             }

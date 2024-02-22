@@ -468,7 +468,7 @@ const SignUpPage: React.FC = () => {
     <div className="flex flex-col md:flex-row gap-4">
       <div className="md:w-1/2 h-screen hidden md:block">
         <img
-          src="src/assets/sign-up.png"
+          src="/assets/sign-up.png"
           alt="Sign Up Image"
           className="h-screen rounded p-10 object-contain fixed"
         />
